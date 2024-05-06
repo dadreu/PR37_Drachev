@@ -6,7 +6,7 @@ namespace Shop_Drachev.Data.Interfaces
 {
     public interface IItems
     {
-        public IEnumerable<IItems> AllItems { get; }
+        public IEnumerable<Items> AllItems { get; }
 
     }
 }

@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Shop_Drachev.Data.Models;
+using Shop_Drachev.Data.Interfaces;
+using Shop_Drachev.Data.Mocks;
 
 namespace Shop_Drachev
 {
@@ -16,7 +19,9 @@ namespace Shop_Drachev
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddTransient<ICategorys, MockCaregorys>();
+            services.AddTransient<IItems, MockItems>();
+            services.AddMvc(option => option.EnableEndpointRouting = false);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
