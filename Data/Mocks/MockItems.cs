@@ -8,7 +8,7 @@ using Shop_Drachev.Data.Mocks;
 
 namespace Shop_Drachev.Data.Mocks
 {
-    public class MockItems : Items
+    public class MockItems : IItems
     {
         public ICategorys _category = new MockCaregorys();
 
