@@ -10,9 +10,6 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Data\DataBase\" />
-    <Folder Include="Data\Interfaces\" />
-    <Folder Include="Data\ViewModell\" />
     <Folder Include="Views\" />
   </ItemGroup>
 
