@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Shop_Drachev.Data.Models;
 using Shop_Drachev.Data.Interfaces;
-using Shop_Drachev.Data.Mocks;
+
 using Shop_Drachev.Data.DataBase;
 
 namespace Shop_Drachev

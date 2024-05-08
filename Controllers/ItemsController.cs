@@ -24,8 +24,8 @@ namespace Shop_Drachev.Controllers
         public ViewResult List(int id = 0)
         {
             ViewBag.Title = "Страница с предметами";
-            VMItems.Categorys = IAllCategorys.AllCategorys;
             VMItems.Items = IAllItems.AllItems;
+            VMItems.Categorys = IAllCategorys.AllCategorys;
             VMItems.SelectCategory = id;
             return View(VMItems);
         }

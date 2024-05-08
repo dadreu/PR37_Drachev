@@ -31,12 +31,15 @@
 .item {
     box-shadow: 2px 2px 2px #00000038;
     margin-bottom:10px;
+    height:110px;
 }
 
 .item img{
     padding: 10px;
     width:100px;
     float:left;
+    height:100px;
+    
 }
 
 .item .data{

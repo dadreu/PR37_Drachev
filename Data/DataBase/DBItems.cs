@@ -26,11 +26,11 @@ namespace Shop_Drachev.Data.DataBase
                     items.Add(new Items()
                     {
                         Id = ItemsReader.IsDBNull(0) ? -1 : ItemsReader.GetInt32(0),
-                        Name = ItemsReader.IsDBNull(1) ? null : ItemsReader.GetString(1),
-                        Description = ItemsReader.IsDBNull(2) ? null : ItemsReader.GetString(2),
-                        Img = ItemsReader.IsDBNull(3) ? null : ItemsReader.GetString(3),
+                        Name = ItemsReader.IsDBNull(1) ? "" : ItemsReader.GetString(1),
+                        Description = ItemsReader.IsDBNull(2) ? "" : ItemsReader.GetString(2),
+                        Img = ItemsReader.IsDBNull(3) ? "" : ItemsReader.GetString(3),
                         Price = ItemsReader.IsDBNull(4) ? -1 : ItemsReader.GetInt32(4),
-                        Category = ItemsReader.IsDBNull(5) ? null : Categorys.First(x => x.Id == ItemsReader.GetInt32(5))
+                        Category = ItemsReader.IsDBNull(5) ? null : Categorys.Where(x => x.Id == ItemsReader.GetInt32(5)).First()
                     });
                 }
                 MySqlConnection.Close();
