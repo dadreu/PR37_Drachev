@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Shop_Drachev.Data.Models;
 using Shop_Drachev.Data.Interfaces;
 using Shop_Drachev.Data.Mocks;
+using Shop_Drachev.Data.DataBase;
 
 namespace Shop_Drachev
 {
@@ -19,8 +20,8 @@ namespace Shop_Drachev
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<ICategorys, MockCaregorys>();
-            services.AddTransient<IItems, MockItems>();
+            services.AddTransient<ICategorys, DBCategory>();
+            services.AddTransient<IItems, DBItems>();
             services.AddMvc(option => option.EnableEndpointRouting = false);
         }
 

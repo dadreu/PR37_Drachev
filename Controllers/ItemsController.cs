@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Shop_Drachev.Data.Interfaces;
+using Shop_Drachev.Data.ViewModell;
 
 namespace Shop_Drachev.Controllers
 {
@@ -12,6 +13,7 @@ namespace Shop_Drachev.Controllers
     {
         private IItems IAllItems;
         private ICategorys IAllCategorys;
+        VMItems VMItems = new VMItems();
 
         public ItemsController(IItems IAllItems, ICategorys IAllCategorys)
         {
@@ -19,11 +21,13 @@ namespace Shop_Drachev.Controllers
             this.IAllCategorys = IAllCategorys;
         }
 
-        public ViewResult List()
+        public ViewResult List(int id = 0)
         {
             ViewBag.Title = "Страница с предметами";
-            var cars = IAllItems.AllItems;
-            return View(cars);
+            VMItems.Categorys = IAllCategorys.AllCategorys;
+            VMItems.Items = IAllItems.AllItems;
+            VMItems.SelectCategory = id;
+            return View(VMItems);
         }
     }
 }

@@ -8,7 +8,7 @@ using Shop_Drachev.Data.Models;
 using Shop_Drachev.Data.Interfaces;
 using Shop_Drachev.Data.DataBase;
 
-namespace Shop_Тепляков.Data.DataBase
+namespace Shop_Drachev.Data.DataBase
 {
     public class DBItems : IItems
     {
