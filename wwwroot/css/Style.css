@@ -30,8 +30,9 @@
 
 .item {
     box-shadow: 2px 2px 2px #00000038;
-    margin-bottom:10px;
-    height:110px;
+    margin-bottom: 10px;
+    height: auto;
+    width: -webkit-fill-available;
 }
 
 .item img{
@@ -53,10 +54,9 @@ h3{
 }
 
 form {
-    box-shadow: 2px 2px 2px #00000038;
+    box-shadow: none;
     width: 400px;
-    padding: 10px;
-    margin: 25px auto;
+    margin: 50px auto;
 }
 
 form div
@@ -73,11 +73,10 @@ form select {
     width: -webkit-fill-available;
 }
 
-form delete {
-    box-shadow: none;
-    width: auto;
-    padding: 0px;
-    margin: 25px;
+.delete {
+    width: 100px;
+    margin: 10px 0px;
 }
+
 
 

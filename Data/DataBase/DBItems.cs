@@ -37,5 +37,48 @@ namespace Shop_Drachev.Data.DataBase
                 return items;
             }
         }
+
+        public int Add(Items item)
+        {
+            MySqlConnection MySqlConnection = Connection.MySqlOpen();
+            Connection.MySqlQuery($"Insert into `items` (`Name`, `Description`, `Img`, `Price`, `IdCategory`) Values ('{item.Name}', '{item.Description}', '{item.Img}', {item.Price}, {item.Category.Id});", MySqlConnection);
+            MySqlConnection.Close();
+
+            int IdItem = -1;
+            MySqlConnection = Connection.MySqlOpen();
+            MySqlDataReader mySqlDataReaderItem = Connection.MySqlQuery($"Select `Id` from `items` where `Name` = '{item.Name}' and `Description` = '{item.Description}' and `Price` = {item.Price} and `IdCategory` = {item.Category.Id};", MySqlConnection);
+            if (mySqlDataReaderItem.HasRows)
+            {
+                mySqlDataReaderItem.Read();
+                IdItem = mySqlDataReaderItem.GetInt32(0);
+            }
+            MySqlConnection.Close();
+            return IdItem;
+        }
+        
+        public void Delete(int id)
+        {
+            MySqlConnection mySqlConnection = Connection.MySqlOpen();
+            Connection.MySqlQuery(
+                $"DELETE FROM items WHERE Id = {id}", mySqlConnection);
+            mySqlConnection.Close();
+        }
+       
+        public void Update(Items Item, int categId)
+        {
+            MySqlConnection mySqlConnection = Connection.MySqlOpen();
+            MySqlDataReader CategoryId = Connection.MySqlQuery(
+                $"SELECT * FROM items WHERE Id = {Item.Id}", mySqlConnection);
+            int newCategoryId = 0;
+            if (CategoryId.HasRows)
+            {
+                CategoryId.Read();
+                newCategoryId = CategoryId.GetInt32(5);
+            }
+            mySqlConnection.Close();
+            mySqlConnection.Open();
+            Connection.MySqlQuery($"UPDATE items SET Name = '{Item.Name}', Description = '{Item.Description}', Img = '{Item.Img}', Price = '{Item.Price}', IdCategory = '{categId}' WHERE Id = {Item.Id}", mySqlConnection);
+            mySqlConnection.Close();
+        }
     }
 }

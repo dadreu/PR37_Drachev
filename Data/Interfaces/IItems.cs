@@ -8,5 +8,9 @@ namespace Shop_Drachev.Data.Interfaces
     {
         public IEnumerable<Items> AllItems { get; }
 
+        public int Add(Items Item);
+        public void Delete(int id);
+        public void Update(Items Item, int categId);
+
     }
 }

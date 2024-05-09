@@ -28,6 +28,12 @@
             window.location = "/Items/List?id=" + sender.value;
         }
     </script>
+    <button onclick="AddItem()">Добавить</button>
+    <script>
+        function AddItem() {
+            window.location = "/Items/Add";
+        }
+    </script>
     </div>
 
     <h2>Все предметы</h2>
@@ -39,12 +45,29 @@
             <div class="item">
                 <img src="@item.Img" />
                 <div class="data">
+                    
                     <h3>Модель:@item.Name</h3>
                     <div>Цена: @item.Price.ToString("c")</div>
                     <div>Категория: @item.Category.Name</div>
                     <div>Описание: @item.Description</div>
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <input type="hidden" name="name" value="@item.Name" />
+                    <input type="hidden" name="description" value="@item.Description" />
+                    <input type="hidden" name="img" value="@item.Img" />
+                    <input type="hidden" name="price" value="@item.Price" />
+                    <input type="hidden" name="idCategory" value="@item.Category" />
+                    <a href="/Items/Edit?id=@item.Id">Изменить</a>
+                    <input type="hidden" name="itemId" value="@item.Id" />
+                    <form class="delete" method="post" action="/Items/Delete">
+                        <input type="hidden" name="itemId" value="@item.Id" />
+                        <input type="submit" value="Удалить" onclick="DeleteItem()" />
+                    </form>
+                    
+
                 </div>
+
             </div>
+
 
         }
     }

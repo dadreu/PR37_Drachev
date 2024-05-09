@@ -62,6 +62,43 @@ namespace Shop_Drachev.Controllers
             int id = IAllItems.Add(newItems);
             return Redirect("/Items/Update?id=" + id);
         }
+        [HttpPost]
+        public IActionResult Delete(int itemId)
+        {
+            IAllItems.Delete(itemId);
+            return RedirectToAction("List", "Items");
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            ViewBag.Categories = IAllCategorys.AllCategorys;
+            var editItem = IAllItems.AllItems.FirstOrDefault(i => i.Id == id);
+            if (editItem == null) return NotFound();
+            return View(editItem);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Items item, IFormFile imageFile, int idCategory)
+        {
+            if (ModelState.IsValid)
+            {
+                if (imageFile != null)
+                {
+                    var uploads = Path.Combine(hostingEnvironment.WebRootPath, "img");
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
+                    var filePath = Path.Combine(uploads, fileName);
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        imageFile.CopyTo(fileStream);
+                    }
+                    item.Img = fileName;
+                }
+                IAllItems.Update(item, idCategory);
+                return RedirectToAction("List", "Items");
+            }
+            return View(item);
+        }
     }
 }
 
