@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Shop_Drachev.Data.Interfaces;
 using Shop_Drachev.Data.ViewModell;
+using Shop_Drachev.Data.Models;
 
 namespace Shop_Drachev.Controllers
 {
@@ -28,6 +29,12 @@ namespace Shop_Drachev.Controllers
             VMItems.Categorys = IAllCategorys.AllCategorys;
             VMItems.SelectCategory = id;
             return View(VMItems);
+        }
+        [HttpGet]
+        public ViewResult Add()
+        {
+            IEnumerable<Categorys> Categorys = IAllCategorys.AllCategorys;
+            return View(Categorys);
         }
     }
 }
