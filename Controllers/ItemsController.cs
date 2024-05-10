@@ -99,6 +99,12 @@ namespace Shop_Drachev.Controllers
             }
             return View(item);
         }
+        public ActionResult Basket(int idItem = -1)
+        {
+            if (idItem != -1) Startup.BasketItem.Add(new ItemsBasket(1, IAllItems.AllItems.Where(x => x.Id == idItem).First()));
+            return Json(Startup.BasketItem);
+        }
+
     }
 }
 

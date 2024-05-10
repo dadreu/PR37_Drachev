@@ -96,6 +96,54 @@
             error: AjaxError
         });
     });
+
+    $(".count").children(".min").click(function () {
+        var idItem = $(this).parent().parent().children('.button').attr('id');
+        var count = $(this).parent().children(".text").text();
+        count--;
+        if (count == 0) {
+            $(this).parent().parent().children('.button').show();
+            $(this).parent().parent().children('.count').hide();
+
+            var basketInfo = localStorage.getItem('BusketInfo');
+            var idItems = basketInfo ? JSON.parse(basketInfo) : [];
+            idItems = idItems.filter(function (item) {
+                return item != idItem;
+            });
+            localStorage.setItem('BusketInfo', JSON.stringify(idItems));
+        } else {
+            $(this).parent().children(".text").text(count);
+        }
+
+        $.ajax({
+            url: '@Url.Action("BasketCount", "Items")',
+            contentType: "application/json; charset=utf-8",
+            data: { idItem: idItem, count: count },
+            dataType: "json",
+            success: SuccessBasket,
+            error: AjaxError
+        });
+    });
+
+
+    $(".count").children(".max").click(function () {
+        var idItem = $(this).parent().parent().children('.button').attr('id');
+        var count = $(this).parent().children(".text").text();
+        count++;
+
+        $(this).parent().children(".text").text(count);
+
+        $.ajax({
+            url: '@Url.Action("BasketCount", "Items")',
+            contentType: "application/json; charset=utf-8",
+            data: { idItem: idItem, count: count },
+            dataType: "json",
+            success: SuccessBasket,
+            error: AjaxError
+        });
+    });
+
+
     function SuccessBasket(data) {
         console.log(data);
     }
