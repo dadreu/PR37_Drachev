@@ -104,7 +104,16 @@ namespace Shop_Drachev.Controllers
             if (idItem != -1) Startup.BasketItem.Add(new ItemsBasket(1, IAllItems.AllItems.Where(x => x.Id == idItem).First()));
             return Json(Startup.BasketItem);
         }
-
+        public ActionResult BasketCount(int idItem = -1, int count = -1)
+        {
+            if (idItem != -1)
+            {
+                if (count == 0)
+                    Startup.BasketItem.Remove(Startup.BasketItem.Find(x => x.Id == idItem));
+                else Startup.BasketItem.Find(x => x.Id == idItem).Count = count;
+            }
+            return Json(new { Startup.BasketItem});
+        }
     }
 }
 
